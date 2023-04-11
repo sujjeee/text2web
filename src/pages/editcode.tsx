@@ -1,7 +1,7 @@
 import Script from 'next/script'
 import React, { useEffect, useState } from 'react'
 
-const editcode = () => {
+export default function Editcode() {
     const [codeData, setCodeData] = useState({ code: '', css: '', js: '' });
 
     useEffect(() => {
@@ -38,5 +38,3 @@ const editcode = () => {
         </>
     );
 };
-
-export default editcode
