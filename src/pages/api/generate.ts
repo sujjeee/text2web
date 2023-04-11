@@ -2,7 +2,7 @@ import { NextApiHandler } from "next";
 
 const handler: NextApiHandler = async (req, res) => {
     try {
-        const { prompt } = await req.body;
+        const { prompt, apiKey } = await req.body;
 
         if (!prompt) {
             return res.status(400).json({ error: 'Prompt is missing' });
@@ -26,7 +26,7 @@ const handler: NextApiHandler = async (req, res) => {
         const openaiRes = await fetch('https://api.openai.com/v1/completions', {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API}`,
+                'Authorization': `Bearer ${apiKey}`,
             },
             method: 'POST',
             body: JSON.stringify(payload),

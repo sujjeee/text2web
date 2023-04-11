@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import SearchBox from '@/components/SearchBox'
 import Hero from '@/components/Hero'
@@ -12,6 +12,12 @@ import ClockLoader from "react-spinners/ClockLoader";
 
 
 export default function Home() {
+  const [apiKey, setApiKey] = useState('')
+
+  useEffect(() => {
+    const localKey = localStorage.getItem("apiKey") || '';
+    setApiKey(localKey);
+  }, []);
 
   const [html, setHtml] = useState(sampleHtml)
   const [css, setCss] = useState(sampleCss)
@@ -19,6 +25,7 @@ export default function Home() {
   const [showLoading, setShowLoading] = useState(false);
 
   const generateWeb = async (inputValue: string) => {
+    console.log('loacl api', apiKey)
 
     const prompt = `According to this description -> ${inputValue}, Generate HTML, CSS and JavaScript website code. Please make sure to use '$$$' to separate the HTML code, CSS code, and JS code. Therefore response should be in the following pattern: "{contains html elements code} $$$ { contains css style code} $$$ {contains javascript code}"`
 
@@ -29,7 +36,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt
+        prompt, apiKey
       }),
     });
 
@@ -43,9 +50,9 @@ export default function Home() {
       const responseObject = JSON.parse(responseText);
       const parts = responseObject.data.split('$$$');
 
-      const htmlPart = parts[0];
-      const cssPart = parts[1];
-      const jsPart = parts[2];
+      const htmlPart = parts[0].trim();
+      const cssPart = parts[1].trim();
+      const jsPart = parts[2].trim();
 
       setHtml(htmlPart);
       setCss(cssPart);

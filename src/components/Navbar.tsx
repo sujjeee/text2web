@@ -1,9 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
 import { AiFillGithub, AiOutlineTwitter } from 'react-icons/ai'
-import { TbShieldLock } from 'react-icons/tb'
+import { ImKey } from 'react-icons/im'
 
-const Navbar = () => {
+
+const Navbar = ({ setIsModalOpen }: any) => {
+    // const handleKeyClick = () => {
+    //     showModal(true);
+    // };
 
     return (
         <nav className="flex px-4 items-center max-w-6xl mx-auto justify-between py-2 sm:py-4 relative text-white">
@@ -13,8 +17,13 @@ const Navbar = () => {
                     <span className='border-2 border-green-500 font-normal px-3 py-1 text-xs rounded-md'>Beta</span>
                 </Link>
             </div>
-            <div className='flex font-semibold  tracking-wide items-center gap-5'>
+            <div className='flex font-semibold  tracking-wide items-center jus gap-5'>
                 <div className=' flex gap-3'>
+                    <ImKey
+                        onClick={setIsModalOpen}
+                        size={25}
+                        className='p-1 cursor-pointer'
+                        title="Set your API key" />
                     <Link
                         href="https://twitter.com/sujjeeee"
                         target="_blank">
