@@ -5,9 +5,6 @@ import { ImKey } from 'react-icons/im'
 
 
 const Navbar = ({ setIsModalOpen }: any) => {
-    // const handleKeyClick = () => {
-    //     showModal(true);
-    // };
 
     return (
         <nav className="flex px-4 items-center max-w-6xl mx-auto justify-between py-2 sm:py-4 relative text-white">

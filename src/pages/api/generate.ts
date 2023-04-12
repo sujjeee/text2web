@@ -8,9 +8,9 @@ const handler: NextApiHandler = async (req, res) => {
             return res.status(400).json({ error: 'Prompt is missing' });
         }
 
-        // if (!apiKey) {
-        //     return res.status(400).json({ error: 'Add your API key' });
-        // }
+        if (!apiKey) {
+            return res.status(400).json({ error: 'Add your API key' });
+        }
 
         const payload = {
             model: "text-davinci-003",
